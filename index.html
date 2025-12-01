@@ -3,163 +3,586 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio - 情報系学生</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons CDN for easy use of modern icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Font Awesome CDN for general icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8g2YmEIPwTY/M3fH9W+c/p6kL6Nn9C/6m7W0S47fJ0T0U1E4xQ2u6G0R8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>My Portfolio - 細野 杏太</title>
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8g2YmEIPwTY/M3fH9W+c/p6kL6Nn9C/6m7W0S47fJ0T0U1E4xQ2u6G0R8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
-        /* Base Configuration */
+        /* Base Configuration - Cyber Neon Theme */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f7f9; /* 非常に薄い青みがかった白 */
+            background-color: #111827; /* Dark Background (Tailwind gray-900) */
+            color: #f3f4f6; /* Light Text */
+            /* ギミック起動前はコンテンツを非表示に */
+            overflow-y: hidden;
         }
         
-        /* Custom Blue Palette */
-        .color-primary { background-color: #2563eb; } /* Tailwind blue-600 */
-        .color-secondary { background-color: #f4f7f9; } 
-        .text-primary { color: #2563eb; }
-        .border-primary { border-color: #2563eb; }
+        /* Custom Neon Accent Palette */
+        /* シアン、マゼンタ、イエローを定義 */
+        .color-primary-cyan { background-color: #00FFFF; } 
+        .color-primary-magenta { background-color: #FF00FF; } 
+        .color-primary-yellow { background-color: #FFFF00; } /* 追加 */
+        .color-secondary { background-color: #1f2937; } /* Darker Section Background */
+        .text-primary-cyan { color: #00FFFF; }
+        .text-primary-magenta { color: #FF00FF; }
+        .text-primary-yellow { color: #FFFF00; } /* 追加 */
+        .border-primary-cyan { border-color: #00FFFF; }
+        .border-primary-magenta { border-color: #FF00FF; }
+        .border-primary-yellow { border-color: #FFFF00; } /* 追加 */
 
-        /* Icon Container Style for visual appeal */
+        /* Keyframe Animation for Neon Pulse (Cyan) */
+        @keyframes neon-pulse {
+            0%, 100% { box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF; }
+            50% { box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF; }
+        }
+        /* Keyframe Animation for Neon Pulse (Magenta) */
+        @keyframes neon-pulse-magenta {
+            0%, 100% { box-shadow: 0 0 5px #FF00FF, 0 0 10px #FF00FF; }
+            50% { box-shadow: 0 0 20px #FF00FF, 0 0 40px #FF00FF; }
+        }
+        /* Keyframe Animation for Neon Pulse (Yellow) */
+        @keyframes neon-pulse-yellow { /* 追加 */
+            0%, 100% { box-shadow: 0 0 5px #FFFF00, 0 0 10px #FFFF00; }
+            50% { box-shadow: 0 0 20px #FFFF00, 0 0 40px #FFFF00; }
+        }
+        
+        /* Keyframe Animation for Glitch Text Effect (subtle) */
+        @keyframes glitch-text {
+            0% { transform: translate(1px, 1px); }
+            50% { transform: translate(-1px, -1px); }
+            100% { transform: translate(1px, 1px); }
+        }
+
+        /* Keyframe for fast, aggressive flash on hover */
+        @keyframes flash-quick {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* GIMMICK: Data Matrix Background Effect */
+        @keyframes matrix-scroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
+        }
+        .data-matrix-bg {
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 1px,
+                rgba(0, 255, 255, 0.04) 1px,
+                rgba(0, 255, 255, 0.04) 2px
+            ),
+            repeating-linear-gradient(
+                90deg, /* 90度回転させて縦方向の流れも */
+                transparent,
+                transparent 1px,
+                rgba(255, 0, 255, 0.03) 1px, /* マゼンタのマトリックスを追加 */
+                rgba(255, 0, 255, 0.03) 2px
+            ),
+            repeating-linear-gradient( /* イエローのマトリックスを追加 */
+                45deg,
+                transparent,
+                transparent 1px,
+                rgba(255, 255, 0, 0.03) 1px,
+                rgba(255, 255, 0, 0.03) 2px
+            );
+            background-size: 100% 4px, 4px 100%, 8px 8px; /* それぞれのパターンサイズ */
+            animation: matrix-scroll 60s linear infinite, matrix-scroll-alt 45s linear infinite; /* 別のアニメーションも追加 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* 最背面に配置 */
+        }
+        @keyframes matrix-scroll-alt {
+             0% { background-position: 0 0; }
+            100% { background-position: 100vw 0; }
+        }
+
+        /* Icon Container Style */
         .icon-box {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 9999px; /* Full circle */
-            color: white;
-            background-color: #2563eb;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            color: #111827;
+            background-color: #00FFFF; /* デフォルトはシアン */
+            box-shadow: 0 0 15px #00FFFF;
+            transition: all 0.1s;
         }
 
-        /* Card Shadow and Border */
+        /* Card Style with Neon Emphasis - UI Improvement: Added Inner Shadow */
         .card {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid #2563eb; /* アクセントライン */
-            transition: transform 0.3s ease-in-out;
+            background-color: #1f2937;
+            border-radius: 4px;
+            border: 2px solid #2d3748;
+            transition: all 0.3s ease-in-out;
+            
+            /* UI Improvement: Subtle inner shadow for depth */
+            box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1); 
+            
+            /* GIMMICK: 3D Tilt Setup */
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform; /* パフォーマンス最適化 */
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #00FFFF;
+            animation: neon-pulse 1.5s infinite alternate;
         }
 
-        /* Responsive Heading Size Adjustments */
+        /* Bold Typography */
+        .h2-bold {
+            font-size: 3rem;
+            text-shadow: 0 0 5px #00FFFF;
+            line-height: 1.1;
+        }
+        
+        /* Neon Quote Text Style */
+        .neon-quote-text {
+            color: #f3f4f6;
+            text-shadow: 0 0 5px #00FFFF, 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* Gaku-Chika Action Block Highlight */
+        .action-highlight {
+            border: 2px solid #00FFFF;
+            box-shadow: 0 0 10px #00FFFF, inset 0 0 5px #00FFFF;
+            transition: all 0.3s;
+        }
+
+        /* Navigation Hover Effect */
+        .nav-link:hover {
+            color: #00FFFF;
+            text-shadow: 0 0 5px #00FFFF;
+            animation: glitch-text 0.2s infinite;
+        }
+
+        /* Section Title Gimmick */
+        .section-title-gimmick:hover .icon-box {
+            animation: flash-quick 0.1s infinite alternate;
+            background-color: #FF00FF; /* ホバーでアイコンの色もマゼンタに */
+            box-shadow: 0 0 15px #FF00FF;
+        }
+        .section-title-gimmick:hover {
+            color: #FF00FF; /* ホバーで文字色もマゼンタに */
+            text-shadow: 0 0 8px #FF00FF;
+        }
+
+        /* Cursor Trail Styling - 輝度とサイズを強化 */
+        #cursor-trail-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .trail-dot {
+            position: absolute;
+            width: 10px; /* サイズアップ */
+            height: 10px; /* サイズアップ */
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+            /* ネオン感を強化。JSで色を決定 */
+        }
+        .trail-dot.cyan {
+            background-color: #00FFFF;
+            box-shadow: 0 0 8px #00FFFF, 0 0 15px #00FFFF; 
+        }
+        .trail-dot.magenta {
+            background-color: #FF00FF;
+            box-shadow: 0 0 8px #FF00FF, 0 0 15px #FF00FF; 
+        }
+        .trail-dot.yellow { /* 追加 */
+            background-color: #FFFF00;
+            box-shadow: 0 0 8px #FFFF00, 0 0 15px #FFFF00; 
+        }
+
+
+        /* NEW GIMMICK: Access Gate Overlay */
+        #access-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #00FFFF;
+            z-index: 10000; /* 最前面 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            transition: opacity 1s ease-out; /* フェードアウト用 */
+        }
+        /* Input/Button Styling */
+        #access-code-input {
+            background-color: #111;
+            border: 1px solid #00FFFF;
+            color: #00FFFF;
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 1.25rem;
+            outline: none;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            width: 100%;
+            max-width: 250px;
+        }
+        #access-code-input:focus {
+            box-shadow: 0 0 15px #00FFFF, inset 0 0 5px #00FFFF;
+        }
+        #access-submit-btn {
+            background-color: #00FFFF;
+            color: #111;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+            max-width: 250px;
+        }
+        #access-submit-btn:hover {
+            background-color: #00E5E5;
+            box-shadow: 0 0 10px #00FFFF;
+        }
+
+        @media (min-width: 640px) {
+            #access-code-input, #access-submit-btn {
+                width: auto;
+                max-width: none;
+            }
+        }
+
         @media (max-width: 640px) {
-            h1 { font-size: 2.5rem; } /* Mobile Title Size */
-            h2 { font-size: 1.5rem; } /* Mobile Section Title Size */
-            .profile-box { padding: 1.5rem; }
+            .h2-bold { font-size: 2rem; }
+            h1 { font-size: 1.5rem; }
+            .neon-quote-text { font-size: 1.25rem; }
         }
     </style>
 </head>
 <body class="min-h-screen">
+    
+    <!-- NEW GIMMICK: Access Gate Overlay (Must be visible first) --><div id="access-gate">
+        <div class="text-center p-8 border border-primary-cyan shadow-2xl shadow-cyan-500/50 mx-4">
+            <h1 class="text-4xl md:text-6xl mb-6 font-extrabold neon-quote-text">
+                // SYSTEM LOGIN
+            </h1>
+            <p id="access-message" class="text-lg md:text-xl mb-6 text-primary-cyan animate-pulse font-mono">
+                ACCESS CODE REQUIRED:
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0">
+                <input type="text" id="access-code-input" placeholder="CODE (0000)" maxlength="5" class="sm:w-48">
+                <button id="access-submit-btn" class="sm:ml-4">ENTER</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- GIMMICK 1: Cursor Trail Container (for JavaScript) --><div id="cursor-trail-container"></div>
+    
+    <!-- GIMMICK: Data Matrix Background --><div class="data-matrix-bg"></div>
 
-    <!-- 1. Header Section -->
-    <header class="color-primary shadow-lg p-4 sticky top-0 z-50">
+    <!-- 1. Header Section --><header class="color-secondary shadow-2xl p-4 sticky top-0 z-50 border-b border-primary-cyan">
         <div class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-white text-2xl font-bold">My Portfolio</h1>
-            <!-- Navigation (Placeholder - Could be used for scrolling) -->
-            <nav class="hidden sm:block">
-                <a href="#about" class="text-white hover:text-blue-200 transition duration-150 mx-3">自己紹介</a>
-                <a href="#gaku-chika" class="text-white hover:text-blue-200 transition duration-150 mx-3">ガクチカ</a>
+            <h1 class="text-white text-3xl font-extrabold tracking-widest text-primary-cyan hover:animate-pulse">
+                MY PORTFOLIO <span class="text-xs text-gray-400">/ V2.2</span>
+            </h1>
+            <!-- Navigation (Desktop) --><nav class="hidden sm:block">
+                <a href="#about" class="text-gray-300 transition duration-150 mx-3 font-medium nav-link">自己紹介</a>
+                <a href="#gaku-chika" class="text-gray-300 transition duration-150 mx-3 font-medium nav-link">ガクチカ</a>
+                <a href="#skills" class="text-gray-300 transition duration-150 mx-3 font-medium nav-link">スキル</a>
             </nav>
+            <!-- Mobile Menu Button --><button id="menu-toggle" class="sm:hidden text-primary-cyan text-2xl z-20">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="container mx-auto p-4 md:p-8 space-y-12">
+    <!-- Mobile Menu (Hidden by default) --><div id="mobile-menu" class="fixed inset-0 bg-gray-900/95 backdrop-blur-sm z-40 hidden flex flex-col items-center justify-center space-y-8 color-secondary border-b-4 border-primary-cyan">
+        <a href="#about" class="text-4xl text-white font-extrabold nav-link" onclick="closeMobileMenu();">自己紹介</a>
+        <a href="#gaku-chika" class="text-4xl text-white font-extrabold nav-link" onclick="closeMobileMenu();">ガクチカ</a>
+        <a href="#skills" class="text-4xl text-white font-extrabold nav-link" onclick="closeMobileMenu();">スキル</a>
+    </div>
 
-        <!-- 2. Profile / Hero Section -->
-        <section id="about" class="profile-box card flex flex-col md:flex-row items-center p-6 md:p-10 mt-8">
-            <!-- Left Side: Placeholder for Profile Image/Icon -->
-            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
-                <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-300 rounded-full border-4 border-primary flex items-center justify-center text-5xl text-white color-primary">
-                    <i class="fas fa-user-tie"></i> <!-- Font Awesome Icon -->
-                </div>
+    <!-- Personal Motto / Statement Section --><div class="w-full color-secondary p-5 md:p-8 border-b border-primary-cyan text-center z-10 relative">
+        <!-- GIMMICK: Typewriter Effect Target --><p class="text-xl md:text-3xl font-extrabold text-white tracking-wider max-w-4xl mx-auto neon-quote-text" id="motto-text" style="visibility: hidden;">
+            「分析なき努力は盲目であり、実行なき戦略は無意味である。」
+        </p>
+        <p class="text-sm md:text-md text-primary-cyan mt-2 font-mono">
+            // KYOTA HOSONO / CORE PRINCIPLE
+        </p>
+    </div>
+    
+    <!-- Main Content Container --><main class="container mx-auto p-4 md:p-10 space-y-16">
+
+        <!-- 2. Profile / Hero Section - GIMMICK 2: 3D Tilt Applied Here via JS --><section id="about" class="profile-box card p-8 md:p-12 mt-12 flex flex-col md:flex-row items-center relative overflow-hidden">
+             <!-- Left Side: Placeholder for Profile Icon (High Contrast) --><div class="flex-shrink-0 mb-6 md:mb-0 md:mr-10">
+                <div class="w-40 h-40 md:w-52 md:h-52 bg-gray-700 border-4 border-primary-cyan rounded-full flex items-center justify-center text-6xl text-white shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-400/80 transition duration-300">
+                    <i class="fas fa-terminal"></i> <!-- テクノロジーアイコンを強調 --></div>
             </div>
             
-            <!-- Right Side: Text Content -->
-            <div class="text-center md:text-left">
-                <p class="text-sm font-semibold text-primary mb-1">INFORMATION TECHNOLOGY STUDENT</p>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
+            <!-- Right Side: Text Content --><div class="text-center md:text-left">
+                <p class="text-md font-semibold text-primary-cyan mb-2 tracking-widest animate-pulse">SYSTEM ACCESS: GRANTED</p>
+                <h2 class="h2-bold font-extrabold text-white uppercase">
                     細野 杏太
                 </h2>
-                <p class="mt-3 text-xl text-gray-600">
+                <p class="mt-2 text-2xl text-gray-400 font-mono">
                     日本大学 理工学部
                 </p>
-                <p class="mt-4 text-gray-500">
-                    技術と論理的思考力を兼ね備えたWebエンジニアを目指し、日々学習に取り組んでいます。
+                <p class="mt-4 text-gray-400 leading-relaxed max-w-xl">
+                    論理的思考力と目標達成への強い意志を持つWeb開発者志望。課題解決のプロセスをシステムとして構築することに情熱を注ぎます。
                 </p>
             </div>
         </section>
 
-        <!-- 3. Gaku-Chika (学生時代に力を入れたこと) Section -->
-        <section id="gaku-chika" class="space-y-6">
-            <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-primary pb-2 flex items-center">
-                <span class="icon-box mr-3"><i class="fas fa-dumbbell"></i></span>
-                学生時代に力を入れたこと（ガクチカ）
+        <!-- 3. Gaku-Chika (学生時代に力を入れたこと) Section --><section id="gaku-chika" class="space-y-8">
+            <!-- Section Title Flash Effect --><h2 class="text-3xl font-extrabold text-white border-b-4 border-primary-cyan pb-3 flex items-center tracking-widest section-title-gimmick">
+                <span class="icon-box mr-4"><i class="fas fa-fist-raised"></i></span>
+                学生時代に力を入れたこと / GAKU-CHIKA
             </h2>
 
-            <!-- Gaku-Chika Card -->
-            <div class="card p-6 md:p-8 space-y-4">
-                <h3 class="text-xl font-semibold text-gray-700">初心者からのバドミントン部レギュラー獲得</h3>
-                <div class="text-gray-600 leading-relaxed text-base">
-                    <!-- 状況・課題 -->
-                    <p class="mb-3 border-l-4 border-gray-300 pl-3">
-                        高校バドミントン部で、初心者ながら団体戦メンバー入りを目指しました。**経験者との大きな実力差**を埋めるため、「量と質の追求」を徹底しました。
+            <!-- Gaku-Chika Card --><div class="card p-8 space-y-5">
+                <h3 class="text-2xl font-bold text-primary-cyan border-b border-gray-700 pb-2 uppercase tracking-wide">
+                    初心者からのバドミントン部レギュラー獲得 - EXECUTION POWER
+                </h3>
+                <div class="text-gray-300 leading-relaxed text-base">
+                    <!-- 状況・課題 --><p class="mb-4 border-l-4 border-gray-500 pl-4 font-mono text-sm">
+                        [SITUATION/CHALLENGE]: 高校バドミントン部で、初心者ながら団体戦メンバー入りを目指しました。経験者との大きな実力差を埋めるため、「量と質の追求」を徹底しました。
                     </p>
                     
-                    <!-- 行動 -->
-                    <p class="mb-3 bg-blue-50 p-3 rounded-lg border border-blue-200">
-                        具体的には、**週5回の全体練習**に加え、**週3回の自主練習**を3年間継続。単にこなすだけでなく、自分のプレー動画分析から課題を見つけ、フットワーク強化など戦略的な練習に注力しました。
-                    </p>
+                    <!-- 行動 (Emphasis on Action) --><div class="mb-4 p-4 rounded-md color-secondary action-highlight hover:bg-gray-700 transition duration-300">
+                        <p class="font-bold text-primary-cyan mb-2 flex items-center"><i class="fas fa-bolt mr-2 text-xl"></i> STRATEGIC ACTION LOG:</p>
+                        <ul class="list-disc ml-6 text-gray-300 space-y-1">
+                            <li>**週5回の全体練習**に加え、**週3回の自主練習**を3年間継続（実行力の証明）。</li>
+                            <li>自分のプレー動画分析から課題を見つけ、フットワーク強化など戦略的な練習に注力（分析力の証明）。</li>
+                        </ul>
+                    </div>
                     
-                    <!-- 結果・学び -->
-                    <p class="font-medium text-gray-700">
-                        結果、部内**上位5名**に入りレギュラーを獲得。この経験から、困難な目標に対しても現状を分析し、**粘り強く努力を積み重ねることで必ず成果を出せる**と学びました。
+                    <!-- 結果・学び --><p class="font-medium text-white mt-4 border-t border-gray-700 pt-4">
+                        [RESULT]: 部内**上位5名**に入りレギュラーを獲得。この経験から、困難な目標に対しても現状を分析し、**粘り強く努力を積み重ねることで必ず成果を出せる**と学びました。
                     </p>
                 </div>
             </div>
         </section>
         
-        <!-- Optional: Skill or Project Placeholder -->
-        <section id="skills" class="space-y-6">
-            <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-primary pb-2 flex items-center">
-                <span class="icon-box mr-3"><i class="fas fa-laptop-code"></i></span>
-                スキル・技術スタック (Placeholder)
+        <!-- Optional: Skill or Project Placeholder --><section id="skills" class="space-y-8">
+            <!-- Section Title Flash Effect --><h2 class="text-3xl font-extrabold text-white border-b-4 border-primary-cyan pb-3 flex items-center tracking-widest section-title-gimmick">
+                <span class="icon-box mr-4"><i class="fas fa-code-branch"></i></span>
+                技術スタック・コアコンピタンス
             </h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="card p-4 text-center">HTML/CSS</div>
-                <div class="card p-4 text-center">JavaScript</div>
-                <div class="card p-4 text-center">Python</div>
-                <div class="card p-4 text-center">Tailwind CSS</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="card p-5 text-center text-white font-extrabold text-lg hover:bg-cyan-900/50">HTML/CSS (Tailwind)</div>
+                <div class="card p-5 text-center text-white font-extrabold text-lg hover:bg-cyan-900/50">JavaScript (React)</div>
+                <div class="card p-5 text-center text-white font-extrabold text-lg hover:bg-cyan-900/50">Python (Data)</div>
+                <div class="card p-5 text-center text-white font-extrabold text-lg hover:bg-cyan-900/50">Git/GitHub</div>
             </div>
         </section>
 
     </main>
 
-    <!-- 4. Footer Section -->
-    <footer class="color-primary mt-12 p-6">
-        <div class="container mx-auto text-center text-white text-sm">
-            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
-            <p class="mt-1">Designed by 細野 杏太</p>
+    <!-- 4. Footer Section --><footer class="color-secondary mt-16 p-6 border-t border-primary-cyan">
+        <div class="container mx-auto text-center text-gray-500 text-sm font-mono">
+            <p>&copy; 2024 MY PORTFOLIO / HOSONO KYOTA</p>
+            <p class="mt-1 text-primary-cyan animate-pulse">-- SYSTEM OPERATIONAL --</p>
         </div>
     </footer>
 
-    <!-- Initialize Lucide Icons for dynamic rendering (if used) -->
-    <script>
-        // Placeholder for any necessary JavaScript if Lucide icons were used with the 'data-lucide' attribute.
-        // If not using 'data-lucide', this is not strictly necessary but good practice.
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+    <!-- Script for Gimmicks --><script>
+        // --- 共通関数 ---
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuToggle = document.getElementById('menu-toggle');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+            if (menuToggle) menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
         }
+
+        // GIMMICK 3: Typewriter Effect for Motto
+        function typewriterEffect(elementId, speed) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            const fullText = element.textContent.trim();
+            element.textContent = '';
+            element.style.visibility = 'visible';
+            let i = 0;
+
+            function typing() {
+                if (i < fullText.length) {
+                    element.textContent += fullText.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                } else {
+                    element.style.animation = 'neon-pulse 3s infinite alternate';
+                }
+            }
+            
+            element.style.animation = 'none';
+            typing();
+        }
+
+        // GIMMICK 1: Cursor Trail Implementation - ドットの数と移動ロジック
+        const trailContainer = document.getElementById('cursor-trail-container');
+        const DOT_COUNT = 20; 
+        const dots = [];
+        const colors = ['cyan', 'magenta', 'yellow']; // 新しい色リストに'yellow'を追加
+
+        for (let i = 0; i < DOT_COUNT; i++) {
+            const dot = document.createElement('div');
+            // ランダムに色クラスを追加
+            dot.className = `trail-dot ${colors[Math.floor(Math.random() * colors.length)]}`; 
+            trailContainer.appendChild(dot);
+            dots.push(dot);
+        }
+
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateTrail() {
+            let targetX = mouseX;
+            let targetY = mouseY;
+            
+            dots.forEach((dot, index) => {
+                const currentX = parseFloat(dot.style.left) || targetX;
+                const currentY = parseFloat(dot.style.top) || targetY;
+
+                const newX = currentX + (targetX - currentX) * 0.15;
+                const newY = currentY + (targetY - currentY) * 0.15;
+
+                dot.style.left = `${newX}px`;
+                dot.style.top = `${newY}px`;
+                
+                if (dot.style.opacity === "" || dot.style.opacity === "0") {
+                    dot.style.opacity = '1';
+                    dot.style.transform = 'scale(1)';
+                }
+                
+                targetX = newX;
+                targetY = newY;
+            });
+
+            requestAnimationFrame(animateTrail);
+        }
+        
+        // GIMMICK 2: 3D Card Tilt Implementation
+        const profileCard = document.getElementById('about');
+        const TILT_MAX = 5; 
+        
+        function setupTiltEffect() {
+            if (!profileCard) return;
+
+            profileCard.addEventListener('mousemove', (e) => {
+                const rect = profileCard.getBoundingClientRect();
+                
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                const tiltY = -(x / (rect.width / 2)) * TILT_MAX; 
+                const tiltX = (y / (rect.height / 2)) * TILT_MAX; 
+
+                profileCard.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+            });
+
+            profileCard.addEventListener('mouseleave', () => {
+                profileCard.style.transition = 'transform 0.5s ease-out, border-color 0.3s ease-in-out';
+                profileCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            });
+
+            profileCard.addEventListener('mouseenter', () => {
+                 profileCard.style.transition = 'border-color 0.3s ease-in-out';
+            });
+        }
+        
+        // --- ギミック起動ロジック ---
+
+        // 全てのポートフォリオ内のギミックを開始する関数
+        function startPortfolioGimmicks() {
+            document.body.style.overflowY = 'auto'; // スクロールを許可
+            typewriterEffect('motto-text', 50);
+            animateTrail(); 
+            setupTiltEffect();
+        }
+
+        // GIMMICK 4: Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuToggle.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.replace('fa-times', 'fa-bars');
+                } else {
+                    icon.classList.replace('fa-bars', 'fa-times');
+                }
+            });
+        }
+        
+        // NEW GIMMICK: Access Gate Logic (Initialization)
+        function initAccessGate() {
+            const gate = document.getElementById('access-gate');
+            const input = document.getElementById('access-code-input');
+            const button = document.getElementById('access-submit-btn');
+            const message = document.getElementById('access-message');
+            const CORRECT_CODE = '0000'; 
+            
+            // 認証チェック関数
+            function checkAccess() {
+                const enteredCode = input.value.toUpperCase().trim();
+                
+                if (enteredCode === CORRECT_CODE) {
+                    message.textContent = "ACCESS GRANTED. INITIALIZING SYSTEM...";
+                    message.classList.remove('animate-pulse');
+                    
+                    // 1秒後にフェードアウト
+                    setTimeout(() => {
+                        gate.style.opacity = '0';
+                        setTimeout(() => {
+                            gate.style.display = 'none'; 
+                            // アクセス許可後、他のギミックとスクロールを開始
+                            startPortfolioGimmicks(); 
+                        }, 1000);
+                    }, 1000);
+                    
+                } else {
+                    message.textContent = "ACCESS DENIED. RETRYING...";
+                    input.value = '';
+                    input.focus();
+                    
+                    setTimeout(() => {
+                        message.textContent = "ACCESS CODE REQUIRED:";
+                    }, 1500);
+                }
+            }
+
+            // イベントリスナー
+            button.addEventListener('click', checkAccess);
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkAccess();
+                }
+            });
+            
+            // 初期状態で input にフォーカス
+            input.focus();
+        }
+
+
+        // ページロード時に Access Gate を初期化
+        window.onload = initAccessGate;
+
     </script>
 </body>
 </html>
