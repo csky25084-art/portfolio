@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - 情報系学生</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN for easy use of modern icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome CDN for general icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8g2YmEIPwTY/M3fH9W+c/p6kL6Nn9C/6m7W0S47fJ0T0U1E4xQ2u6G0R8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* Base Configuration */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9; /* 非常に薄い青みがかった白 */
+        }
+        
+        /* Custom Blue Palette */
+        .color-primary { background-color: #2563eb; } /* Tailwind blue-600 */
+        .color-secondary { background-color: #f4f7f9; } 
+        .text-primary { color: #2563eb; }
+        .border-primary { border-color: #2563eb; }
+
+        /* Icon Container Style for visual appeal */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 9999px; /* Full circle */
+            color: white;
+            background-color: #2563eb;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Card Shadow and Border */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #2563eb; /* アクセントライン */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Responsive Heading Size Adjustments */
+        @media (max-width: 640px) {
+            h1 { font-size: 2.5rem; } /* Mobile Title Size */
+            h2 { font-size: 1.5rem; } /* Mobile Section Title Size */
+            .profile-box { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- 1. Header Section -->
+    <header class="color-primary shadow-lg p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-white text-2xl font-bold">My Portfolio</h1>
+            <!-- Navigation (Placeholder - Could be used for scrolling) -->
+            <nav class="hidden sm:block">
+                <a href="#about" class="text-white hover:text-blue-200 transition duration-150 mx-3">自己紹介</a>
+                <a href="#gaku-chika" class="text-white hover:text-blue-200 transition duration-150 mx-3">ガクチカ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto p-4 md:p-8 space-y-12">
+
+        <!-- 2. Profile / Hero Section -->
+        <section id="about" class="profile-box card flex flex-col md:flex-row items-center p-6 md:p-10 mt-8">
+            <!-- Left Side: Placeholder for Profile Image/Icon -->
+            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
+                <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-300 rounded-full border-4 border-primary flex items-center justify-center text-5xl text-white color-primary">
+                    <i class="fas fa-user-tie"></i> <!-- Font Awesome Icon -->
+                </div>
+            </div>
+            
+            <!-- Right Side: Text Content -->
+            <div class="text-center md:text-left">
+                <p class="text-sm font-semibold text-primary mb-1">INFORMATION TECHNOLOGY STUDENT</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
+                    細野 杏太
+                </h2>
+                <p class="mt-3 text-xl text-gray-600">
+                    日本大学 理工学部
+                </p>
+                <p class="mt-4 text-gray-500">
+                    技術と論理的思考力を兼ね備えたWebエンジニアを目指し、日々学習に取り組んでいます。
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Gaku-Chika (学生時代に力を入れたこと) Section -->
+        <section id="gaku-chika" class="space-y-6">
+            <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-primary pb-2 flex items-center">
+                <span class="icon-box mr-3"><i class="fas fa-dumbbell"></i></span>
+                学生時代に力を入れたこと（ガクチカ）
+            </h2>
+
+            <!-- Gaku-Chika Card -->
+            <div class="card p-6 md:p-8 space-y-4">
+                <h3 class="text-xl font-semibold text-gray-700">初心者からのバドミントン部レギュラー獲得</h3>
+                <div class="text-gray-600 leading-relaxed text-base">
+                    <!-- 状況・課題 -->
+                    <p class="mb-3 border-l-4 border-gray-300 pl-3">
+                        高校バドミントン部で、初心者ながら団体戦メンバー入りを目指しました。**経験者との大きな実力差**を埋めるため、「量と質の追求」を徹底しました。
+                    </p>
+                    
+                    <!-- 行動 -->
+                    <p class="mb-3 bg-blue-50 p-3 rounded-lg border border-blue-200">
+                        具体的には、**週5回の全体練習**に加え、**週3回の自主練習**を3年間継続。単にこなすだけでなく、自分のプレー動画分析から課題を見つけ、フットワーク強化など戦略的な練習に注力しました。
+                    </p>
+                    
+                    <!-- 結果・学び -->
+                    <p class="font-medium text-gray-700">
+                        結果、部内**上位5名**に入りレギュラーを獲得。この経験から、困難な目標に対しても現状を分析し、**粘り強く努力を積み重ねることで必ず成果を出せる**と学びました。
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Optional: Skill or Project Placeholder -->
+        <section id="skills" class="space-y-6">
+            <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-primary pb-2 flex items-center">
+                <span class="icon-box mr-3"><i class="fas fa-laptop-code"></i></span>
+                スキル・技術スタック (Placeholder)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card p-4 text-center">HTML/CSS</div>
+                <div class="card p-4 text-center">JavaScript</div>
+                <div class="card p-4 text-center">Python</div>
+                <div class="card p-4 text-center">Tailwind CSS</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. Footer Section -->
+    <footer class="color-primary mt-12 p-6">
+        <div class="container mx-auto text-center text-white text-sm">
+            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+            <p class="mt-1">Designed by 細野 杏太</p>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons for dynamic rendering (if used) -->
+    <script>
+        // Placeholder for any necessary JavaScript if Lucide icons were used with the 'data-lucide' attribute.
+        // If not using 'data-lucide', this is not strictly necessary but good practice.
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
